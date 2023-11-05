@@ -25,22 +25,14 @@ while(i < 1):                      #Loop until you want to stop
     # open_image=Image.open(image)
     image_to_text  = pytesseract.image_to_string(image)  #Get text from image
 
-
-    # append text to lines
-    # if(len(Lines) > 0):
-    #     if(Lines[len(Lines)-1] != image_to_text):
-    #         Lines.append(image_to_text)
-    # else:
-    #     Lines.append(image_to_text)
-
     i+=1
     time.sleep(4)
     
 print("image to text is:")
 print(image_to_text)
 print("After appending questions texts is:")
-appended_text=image_to_text+"who is messi?"
-print(appended_text)
+appended_text=image_to_text
+# print(appended_text)
 
 def detect_questions(appended_text):
     question_pattern = r'\b(?:who|what|where|when|why|how|which|is|are|will|do|does|did|can|could|should|may|might|would|has|have|had|shall|was|were|been|being)\b.*[?]'
@@ -51,11 +43,6 @@ def detect_questions(appended_text):
 questions = detect_questions(appended_text)
 # print("detected questions:")
 # print(questions)
-# #Example usage:
-# #input = "  Hi I am hira.  Hi I am hira. Hi I am hira. Hi I am hira.What is ph oh water?"
-
-# for question in questions:
-#     print(questions)
 
 url = "https://api.openai.com/v1/completions"
 questionstr = ""
@@ -77,7 +64,7 @@ headers = {
     "Authorization": f"Bearer {'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'}"
 }
 
-# # Send the POST request
+# Send the POST request
 
 response = requests.post(url, json=payload, headers=headers)
 
